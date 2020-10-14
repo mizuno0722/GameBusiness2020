@@ -2,13 +2,13 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
-/[Ll]ibrary/
-/[Tt]emp/
-/[Oo]bj/
-/[Bb]uild/
-/[Bb]uilds/
-/[Ll]ogs/
-/[Mm]emoryCaptures/
+/GameBusiness2020/[Ll]ibrary/
+/GameBusiness2020/[Tt]emp/
+/GameBusiness2020/[Oo]bj/
+/GameBusiness2020/[Bb]uild/
+/GameBusiness2020/[Bb]uilds/
+/GameBusiness2020/[Ll]ogs/
+/GameBusiness2020/[Mm]emoryCaptures/
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
@@ -58,3 +58,4 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+PackageCache/
