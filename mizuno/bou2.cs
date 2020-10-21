@@ -11,7 +11,9 @@ public class bou2 : MonoBehaviour
     float timer;
     float stoptime;
     int counter;
-    public int eraseFrame = 200;
+    public int growingFrame = 200;//default
+    public int eraseFrame = 200;//default
+    
 
     public enum Type
     {
@@ -51,11 +53,27 @@ public class bou2 : MonoBehaviour
         switch (state)
         {
             case State.Grow:
-                tf.position = defaultTransform;
-                tf.rotation = new Quaternion(0, 0, 0, 0);
-                timer = 0;
-                TypeToggle();
-                state = State.Normal;
+               
+                if(counter == 0)
+                {
+                    gameObject.layer = LayerMask.NameToLayer("Growing");
+                    gameObject.GetComponent<Rigidbody>().useGravity = false;
+                    tf.position = defaultTransform + new Vector3(0.0f, -1.0f, 0.0f);
+                    tf.rotation = new Quaternion(0, 0, 0, 0);
+                    TypeToggle();
+                }
+                var transform = gameObject.GetComponent<Transform>();
+                transform.position += new Vector3(0.0f, 1.0f / (float)growingFrame, 0.0f);
+
+                if (growingFrame == counter)
+                {
+                    state = State.Normal;
+                    timer = 0;
+                    counter = 0;
+                    gameObject.layer = 0; //default
+                    gameObject.GetComponent<Rigidbody>().useGravity = true;
+                }
+                counter++;
                 break;
 
             case State.Normal:
@@ -84,11 +102,12 @@ public class bou2 : MonoBehaviour
 
             case State.Erase:
                 Color color = gameObject.GetComponent<Renderer>().material.color;
-                gameObject.GetComponent<Renderer>().material.color = new Color(color.r, color.g, color.b , color.a - counter / eraseFrame);
+                gameObject.GetComponent<Renderer>().material.color = new Color(color.r, color.g, color.b , color.a - 1 / (float)eraseFrame);
                 counter++;
                 if(counter > eraseFrame)
                 {
                     state = State.Grow;
+                    counter = 0;
                 }
                 break;
         }
