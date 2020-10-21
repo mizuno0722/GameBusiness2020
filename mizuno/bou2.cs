@@ -11,6 +11,7 @@ public class bou2 : MonoBehaviour
     float timer;
     float stoptime;
     int counter;
+    public int eraseFrame = 200;
 
     public enum Type
     {
@@ -83,9 +84,9 @@ public class bou2 : MonoBehaviour
 
             case State.Erase:
                 Color color = gameObject.GetComponent<Renderer>().material.color;
-                gameObject.GetComponent<Renderer>().material.color = new Color(color.r, color.g, color.b , color.a - 0.005f);
+                gameObject.GetComponent<Renderer>().material.color = new Color(color.r, color.g, color.b , color.a - counter / eraseFrame);
                 counter++;
-                if(counter > 200)
+                if(counter > eraseFrame)
                 {
                     state = State.Grow;
                 }
