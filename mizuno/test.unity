@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 268929562}
   - component: {fileID: 268929561}
   - component: {fileID: 268929560}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -465,6 +465,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6471861827360663811, guid: eb14bce0fc697d546bf1538ff49fb527,
+        type: 3}
+      propertyPath: growingFrame
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 6831595264132304504, guid: eb14bce0fc697d546bf1538ff49fb527,
         type: 3}
       propertyPath: m_Name
