@@ -465,6 +465,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6471861827360663811, guid: eb14bce0fc697d546bf1538ff49fb527,
+        type: 3}
+      propertyPath: growingFrame
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 6831595264132304504, guid: eb14bce0fc697d546bf1538ff49fb527,
         type: 3}
       propertyPath: m_Name
