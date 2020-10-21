@@ -84,7 +84,7 @@ public class bou2 : MonoBehaviour
 
             case State.Erase:
                 Color color = gameObject.GetComponent<Renderer>().material.color;
-                gameObject.GetComponent<Renderer>().material.color = new Color(color.r, color.g, color.b , color.a - counter / eraseFrame);
+                gameObject.GetComponent<Renderer>().material.color = new Color(color.r, color.g, color.b , color.a - 1 / (float)eraseFrame);
                 counter++;
                 if(counter > eraseFrame)
                 {
