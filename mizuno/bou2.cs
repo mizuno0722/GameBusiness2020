@@ -11,8 +11,9 @@ public class bou2 : MonoBehaviour
     float timer;
     float stoptime;
     int counter;
-    public int growingFrame = 200;//default
-    public int eraseFrame = 200;//default
+    public float fallDownTime = 3.0f;   //default
+    public int growingFrame = 200;      //default
+    public int eraseFrame = 200;        //default
     
 
     public enum Type
@@ -42,8 +43,6 @@ public class bou2 : MonoBehaviour
         gameObject.GetComponent<Renderer>().material.SetFloat("_Mode", 3);
         gameObject.GetComponent<Renderer>().material.color = Color.blue;
         
-
-        //gameObject.GetComponent<Material>().
         state = State.Normal;
     }
 
@@ -63,7 +62,9 @@ public class bou2 : MonoBehaviour
                     TypeToggle();
                 }
                 var transform = gameObject.GetComponent<Transform>();
+                transform.position = new Vector3(defaultTransform.x, transform.position.y, defaultTransform.z);
                 transform.position += new Vector3(0.0f, 1.0f / (float)growingFrame, 0.0f);
+                tf.rotation = new Quaternion(0, 0, 0, 0);
 
                 if (growingFrame == counter)
                 {
@@ -71,7 +72,10 @@ public class bou2 : MonoBehaviour
                     timer = 0;
                     counter = 0;
                     gameObject.layer = 0; //default
+                    tf.position = defaultTransform;
                     gameObject.GetComponent<Rigidbody>().useGravity = true;
+
+
                 }
                 counter++;
                 break;
@@ -80,11 +84,9 @@ public class bou2 : MonoBehaviour
                 var rot = tf.rotation;
                 if (!(rot.x * rot.x < 0.1 && rot.z * rot.z < 0.1))
                 {
-                    //Debug.Log("倒れた");
-                    //Destroy(this.gameObject);
                     if (timer == 0)
                     {
-                        stoptime = Time.time + 3;
+                        stoptime = Time.time + fallDownTime;
                         timer = Time.time;
                     }
                     state = State.FallDown;
@@ -111,8 +113,11 @@ public class bou2 : MonoBehaviour
                 }
                 break;
         }
-        
-        
+        if(transform.position.y < -50)
+        {
+            state = State.Grow;
+            counter = 0;
+        }
     }
     int TypeToggle()
     {
