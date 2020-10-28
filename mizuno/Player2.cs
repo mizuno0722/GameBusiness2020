@@ -7,7 +7,9 @@ public class Player2 : MonoBehaviour
 {
     float speed = 2;
     float maxSpeed = 10;
-    
+
+    Vector3 defaultTransform;
+
     Rigidbody rb;
 
     Vector2 mouse;
@@ -20,6 +22,7 @@ public class Player2 : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         gameOverFlag = false;
+        defaultTransform = this.transform.position;
     }
 
     // Update is called once per frame
@@ -29,7 +32,7 @@ public class Player2 : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            if(mousef == 0)
+            if (mousef == 0)
             {
                 mouse = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
                 mousef = 1;
@@ -54,10 +57,21 @@ public class Player2 : MonoBehaviour
 
             var movement = new Vector3(moveHorizontal, 0, moveVertical);
 
-            rb.AddForce(movement * speed*10);
+            rb.AddForce(movement * speed * 10);
 
         }
-
+        //y < 10
+        if (this.gameObject.transform.position.y < -10 && gameOverFlag == false)
+        {
+            gameOverFlag = true;
+        }
+        //debug reset
+        if (Input.GetKey(KeyCode.R))
+        {
+            this.transform.position = defaultTransform;
+            this.transform.rotation = new Quaternion(0.0f, 0.0f, 0.0f,0.0f);
+            rb.velocity = Vector3.zero;
+        }
     }
     void OnCollisionEnter(Collision collision)
     {
