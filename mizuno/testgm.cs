@@ -17,7 +17,7 @@ public class testgm : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        bouManager2 = BouManager2.instance;
+        //bouManager2 = GameObject.Find("BouManager").GetComponent<BouManager2>();
         nowStageNum = 0;
         isMove = false;
         difference = 100;
@@ -65,7 +65,7 @@ public class testgm : MonoBehaviour
             stageObject[0] = stageObject[1];
             stageObject[1] = null;
             nowStageNum++;
-//            bouManager2 = GameObject.Find("boumanager").GetComponent<BouManager2>();
+//            bouManager2 = GameObject.Find("BouManager").GetComponent<BouManager2>();
 //            bouManager2.AllDefaultReset();
             return; 
 
