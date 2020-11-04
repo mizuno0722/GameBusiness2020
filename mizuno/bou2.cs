@@ -144,4 +144,9 @@ public class bou2 : MonoBehaviour
     {
         return type;
     }
+
+    public void DefaultReset()
+    {
+        defaultTransform = tf.position;
+    }
 }
