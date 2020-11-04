@@ -5,7 +5,7 @@ using UnityEngine;
 public class BouManager2 : MonoBehaviour
 {
     bou2[] bous;
-    static BouManager2 instance;
+    public static BouManager2 instance;
     bool clearFlag;
 
     // Start is called before the first frame update
@@ -43,5 +43,13 @@ public class BouManager2 : MonoBehaviour
     public bool IsClear()
     {
         return clearFlag;
+    }
+
+    public void AllDefaultReset()
+    {
+        for (int i = 0; i < bous.Length; i++)
+        {
+            bous[i].DefaultReset();
+        }
     }
 }

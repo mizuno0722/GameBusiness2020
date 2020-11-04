@@ -56,6 +56,10 @@ public class bou2 : MonoBehaviour
         switch (state)
         {
             case State.Grow:
+                if(stoptime == 0)
+                {
+                    stoptime = Time.time + growingTime;
+                }
                 var transform = gameObject.GetComponent<Transform>();
                 float y = defaultTransform.y +  -objectHeight * ((stoptime - timer) / growingTime);
                 transform.position = new Vector3(defaultTransform.x, y , defaultTransform.z);
@@ -68,6 +72,7 @@ public class bou2 : MonoBehaviour
                     state = State.Normal;
                     gameObject.layer = 0; //default
                     tf.position = defaultTransform;
+                    transform.position = defaultTransform;
                     gameObject.GetComponent<Rigidbody>().useGravity = true;
                 }
                 break;
@@ -103,7 +108,7 @@ public class bou2 : MonoBehaviour
                     tf.position = defaultTransform + new Vector3(0.0f, -1.0f, 0.0f);
                     tf.rotation = new Quaternion(0, 0, 0, 0);
                     TypeToggle();
-                    stoptime = Time.time + growingTime;
+                    stoptime = 0;
                 }
                 break;
         }
@@ -138,5 +143,10 @@ public class bou2 : MonoBehaviour
     public Type GetType()
     {
         return type;
+    }
+
+    public void DefaultReset()
+    {
+        defaultTransform = tf.position;
     }
 }
