@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -2819832787113030527}
   - component: {fileID: 2713250300905177822}
   m_Layer: 0
-  m_Name: obj3
+  m_Name: obj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,7 +42,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3187937205348546957}
-  m_Mesh: {fileID: -2447776121362496397, guid: 5680fe29992bdc94fb74c23015458538, type: 3}
+  m_Mesh: {fileID: 1243799223545203308, guid: f5b893e6304a7344d9f030b6dc0c3267, type: 3}
 --- !u!23 &3980389938060499032
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -111,8 +111,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fallDownTime: 3
-  growingFrame: 200
-  eraseFrame: 200
+  growingTime: 2
+  eraseTime: 2
 --- !u!64 &2713250300905177822
 MeshCollider:
   m_ObjectHideFlags: 0
