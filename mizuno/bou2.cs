@@ -7,8 +7,10 @@ public class bou2 : MonoBehaviour
     //11/11
     //Growにて物理演算でオブジェクトを動かしたときの挙動調整が上手くいかない為タイマー使ってません
     Transform tf;
+    public AudioClip sound1;
+    AudioSource audiosource;
     Vector3 defaultTransform;
-
+    float defaultRotationY;
     float timer;
     float stoptime;
     int counter;
@@ -38,6 +40,7 @@ public class bou2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audiosource = GetComponent<AudioSource>();
         tf = GetComponent<Transform>();
         timer = 0;
         DefaultReset();
@@ -73,7 +76,7 @@ public class bou2 : MonoBehaviour
                 GetComponent<Rigidbody>().MovePosition(GetComponent<Rigidbody>().position + new Vector3(0.0f, objectHeight / 100, 0.0f));
 
                 //transform.localPosition = new Vector3(defaultTransform.x, y , defaultTransform.z);
-                tf.rotation = new Quaternion(0, 0, 0, 0);
+                tf.rotation = new Quaternion(0, defaultRotationY, 0, 0);
                 
                 //if (timer > stoptime)//Nomal init
                 if(counter > 200) //debug MovePosition の挙動の為長め
@@ -82,7 +85,7 @@ public class bou2 : MonoBehaviour
                     gameObject.layer = 0; //default
                     tf.localPosition = defaultTransform;
                     gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                    tf.rotation = new Quaternion(0, 0, 0, 0);
+                    tf.rotation = new Quaternion(0, defaultRotationY, 0, 0);
                     gameObject.GetComponent<Rigidbody>().useGravity = true;
                     gameObject.GetComponent<Rigidbody>().isKinematic = false;
                 }
@@ -101,6 +104,7 @@ public class bou2 : MonoBehaviour
             case State.FallDown:
                 if (timer > stoptime) //erase init
                 {
+                    audiosource.PlayOneShot(sound1);
                     state = State.Erase;
                     stoptime = Time.time + fallDownTime;
                 }
@@ -118,7 +122,7 @@ public class bou2 : MonoBehaviour
                     gameObject.layer = LayerMask.NameToLayer("Growing");
                     gameObject.GetComponent<Rigidbody>().useGravity = false;
                     tf.localPosition = defaultTransform + new Vector3(0.0f, -objectHeight, 0.0f);
-                    tf.rotation = new Quaternion(0, 0, 0, 0);
+                    tf.rotation = new Quaternion(0, defaultRotationY, 0, 0);
                     TypeToggle();
                     stoptime = 0;
                     gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -132,7 +136,7 @@ public class bou2 : MonoBehaviour
             gameObject.layer = LayerMask.NameToLayer("Growing");
             gameObject.GetComponent<Rigidbody>().useGravity = false;
             tf.localPosition = defaultTransform + new Vector3(0.0f, -objectHeight - 0.03f, 0.0f);
-            tf.rotation = new Quaternion(0, 0, 0, 0);
+            tf.rotation = new Quaternion(0, defaultRotationY, 0, 0);
             TypeToggle();
             stoptime = 0;
             gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -164,5 +168,6 @@ public class bou2 : MonoBehaviour
     public void DefaultReset()
     {
         defaultTransform = tf.position + new Vector3(0.0f,0.02f,0.0f);
+        defaultRotationY = tf.rotation.y;
     }
 }

@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class testgm : MonoBehaviour
 {
     StageData stageData;
+    Player2 player2;
     int nowStageNum;
     bool isMove;
     GameObject[] stageObject = new GameObject[2];
@@ -17,7 +19,7 @@ public class testgm : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        player2 = Player2.instance;
         nowStageNum = 0;
         isMove = false;
         difference = 100;
@@ -50,6 +52,8 @@ public class testgm : MonoBehaviour
                     q = Quaternion.identity;
 
                     stageObject[1] = Instantiate(stageData.stage[nowStageNum + 1], position, q);
+                    GameObject.Find("GameClearText").GetComponent<Text>().color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
+                    GameObject.Find("GameOverText").GetComponent<Text>().color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
                 }
             }
         }
@@ -66,10 +70,12 @@ public class testgm : MonoBehaviour
             stageObject[0] = stageObject[1];
             stageObject[1] = null;
             nowStageNum++;
-            bouManager2 = stageObject[0].transform.FindChild("BouManager").GetComponent<BouManager2>();
+            bouManager2 = stageObject[0].transform.Find("BouManager").GetComponent<BouManager2>();
+            player2 = stageObject[0].transform.Find("Player").GetComponent<Player2>();
 
             //bouManager2 = GameObject.Find("BouManager").GetComponent<BouManager2>();
             bouManager2.AllDefaultReset();
+            player2.DefaultReset();
             return; 
 
         }

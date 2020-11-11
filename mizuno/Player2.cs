@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class Player2 : MonoBehaviour
 {
-    Player2 instance;
+    public static Player2 instance;
     float speed = 2;
     float maxSpeed = 10;
 
@@ -90,6 +90,10 @@ public class Player2 : MonoBehaviour
     public bool IsGameOver()
     {
         return gameOverFlag;
+    }
+    public void DefaultReset()
+    {
+        defaultTransform = gameObject.GetComponent<Transform>().position + new Vector3(0.0f, 0.02f, 0.0f);
     }
 
 
