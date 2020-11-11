@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class bou2 : MonoBehaviour
 {
-
+    //11/11
+    //Growにて物理演算でオブジェクトを動かしたときの挙動調整が上手くいかない為タイマー使ってません
     Transform tf;
     Vector3 defaultTransform;
 
@@ -59,15 +60,23 @@ public class bou2 : MonoBehaviour
                 if(stoptime == 0)
                 {
                     stoptime = Time.time + growingTime;
+                    counter = 0;
                 }
                 var transform = gameObject.GetComponent<Transform>();
-                float y = defaultTransform.y +  -objectHeight * ((stoptime - timer) / growingTime) -0.02f;
-                this.GetComponent<Rigidbody>().MovePosition(new Vector3(defaultTransform.x, y, defaultTransform.z));
+                float y = (defaultTransform.y - (defaultTransform.y - objectHeight)) * ((stoptime - timer) / growingTime) - transform.position.y / (defaultTransform.y - (defaultTransform.y - objectHeight));
+
+                //float y = defaultTransform.y +  -objectHeight * ((stoptime - timer) / growingTime);
+                //this.GetComponent<Rigidbody>().MovePosition(new Vector3(0, y, 0));
+                //this.GetComponent<Rigidbody>().MovePosition(tf.parent.gameObject.transform.InverseTransformPoint(new Vector3(defaultTransform.x, y, defaultTransform.z)) );
+
+                //debug 移動距離が足りない？MovePositionの挙動がおかしい
+                GetComponent<Rigidbody>().MovePosition(GetComponent<Rigidbody>().position + new Vector3(0.0f, objectHeight / 100, 0.0f));
 
                 //transform.localPosition = new Vector3(defaultTransform.x, y , defaultTransform.z);
                 tf.rotation = new Quaternion(0, 0, 0, 0);
-
-                if (timer > stoptime)//Nomal init
+                
+                //if (timer > stoptime)//Nomal init
+                if(counter > 200) //debug MovePosition の挙動の為長め
                 {
                     state = State.Normal;
                     gameObject.layer = 0; //default
@@ -75,7 +84,9 @@ public class bou2 : MonoBehaviour
                     gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
                     tf.rotation = new Quaternion(0, 0, 0, 0);
                     gameObject.GetComponent<Rigidbody>().useGravity = true;
+                    gameObject.GetComponent<Rigidbody>().isKinematic = false;
                 }
+                counter++;
                 break;
 
             case State.Normal:
@@ -106,11 +117,12 @@ public class bou2 : MonoBehaviour
                     state = State.Grow;
                     gameObject.layer = LayerMask.NameToLayer("Growing");
                     gameObject.GetComponent<Rigidbody>().useGravity = false;
-                    tf.localPosition = defaultTransform + new Vector3(0.0f, -objectHeight-0.03f, 0.0f);
+                    tf.localPosition = defaultTransform + new Vector3(0.0f, -objectHeight, 0.0f);
                     tf.rotation = new Quaternion(0, 0, 0, 0);
                     TypeToggle();
                     stoptime = 0;
                     gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                    gameObject.GetComponent<Rigidbody>().isKinematic = true;
                 }
                 break;
         }
@@ -124,6 +136,7 @@ public class bou2 : MonoBehaviour
             TypeToggle();
             stoptime = 0;
             gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            gameObject.GetComponent<Rigidbody>().isKinematic = true;
         }
     }
     int TypeToggle()
