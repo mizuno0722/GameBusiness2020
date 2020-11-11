@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public class Player2 : MonoBehaviour
 {
+    Player2 instance;
     float speed = 2;
     float maxSpeed = 10;
 
@@ -20,6 +21,7 @@ public class Player2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        instance = this;
         rb = GetComponent<Rigidbody>();
         gameOverFlag = false;
         defaultTransform = this.transform.position;
