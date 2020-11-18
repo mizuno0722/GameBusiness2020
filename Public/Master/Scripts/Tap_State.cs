@@ -34,7 +34,7 @@ public class Tap_State : MonoBehaviour
             {
                 case GameManager.GameState.Title://タイトル画面でタップされた処理
                     gamemanager_script.state = GameManager.GameState.Game;
-                    GameObject.Find("TapUI").SetActive(false);
+                    GameObject.Find("TitleUI").SetActive(false);
                     break;
 
                 case GameManager.GameState.Gameover://ゲームオーバー時にタップされた処理

@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
                 
                 if (Input.GetMouseButton(0))
                 {
+                    if (testgm == null) testgm = Testgm.instance;
                     testgm.NextStage();
                 }
 
@@ -64,6 +65,7 @@ public class GameManager : MonoBehaviour
             case GameState.Gameover:
                 if (Input.GetMouseButton(0))
                 {
+                    if (testgm == null) testgm = Testgm.instance;
                     testgm.Reset();
                     state = GameState.Game;
                 }
