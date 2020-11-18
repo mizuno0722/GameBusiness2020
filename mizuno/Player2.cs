@@ -70,9 +70,7 @@ public class Player2 : MonoBehaviour
         //debug reset
         if (Input.GetKey(KeyCode.R))
         {
-            this.transform.position = defaultTransform;
-            this.transform.rotation = new Quaternion(0.0f, 0.0f, 0.0f,0.0f);
-            rb.velocity = Vector3.zero;
+            Reset();
         }
     }
     void OnCollisionEnter(Collision collision)
@@ -95,6 +93,11 @@ public class Player2 : MonoBehaviour
     {
         defaultTransform = gameObject.GetComponent<Transform>().position + new Vector3(0.0f, 0.02f, 0.0f);
     }
-
+    public void Reset()
+    {
+        this.transform.position = defaultTransform;
+        this.transform.rotation = new Quaternion(0.0f, 0.0f, 0.0f, 0.0f);
+        rb.velocity = Vector3.zero;
+    }
 
 }

@@ -52,4 +52,11 @@ public class BouManager2 : MonoBehaviour
             bous[i].DefaultReset();
         }
     }
+    public void AllReset()
+    {
+        for (int i = 0; i < bous.Length; i++)
+        {
+            bous[i].Reset();
+        }
+    }
 }

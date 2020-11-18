@@ -11,14 +11,17 @@ public class bou2 : MonoBehaviour
     AudioSource audiosource;
     Vector3 defaultTransform;
     float defaultRotationY;
+    Quaternion defaultRotation;
     float timer;
     float stoptime;
     int counter;
     public float fallDownTime = 3.0f;   //default
-    public float growingTime = 2.0f;      //default
-    public float eraseTime = 2.0f;        //default
+    public float growingTime = 1.0f;      //default
+    public float eraseTime = 1.0f;        //default
 
     float objectHeight;
+
+    Vector3 testpos;
 
     public enum Type
     {
@@ -51,6 +54,7 @@ public class bou2 : MonoBehaviour
         state = State.Normal;
 
         objectHeight = gameObject.GetComponent<Renderer>().bounds.size.y + 0.0f;
+
     }
 
     // Update is called once per frame
@@ -63,29 +67,22 @@ public class bou2 : MonoBehaviour
                 if(stoptime == 0)
                 {
                     stoptime = Time.time + growingTime;
-                    counter = 0;
+                    counter = 1;
                 }
-                var transform = gameObject.GetComponent<Transform>();
-                float y = (defaultTransform.y - (defaultTransform.y - objectHeight)) * ((stoptime - timer) / growingTime) - transform.position.y / (defaultTransform.y - (defaultTransform.y - objectHeight));
+                testpos += new Vector3(0.0f, objectHeight / 100.0f, 0.0f);
 
-                //float y = defaultTransform.y +  -objectHeight * ((stoptime - timer) / growingTime);
-                //this.GetComponent<Rigidbody>().MovePosition(new Vector3(0, y, 0));
-                //this.GetComponent<Rigidbody>().MovePosition(tf.parent.gameObject.transform.InverseTransformPoint(new Vector3(defaultTransform.x, y, defaultTransform.z)) );
+                GetComponent<Rigidbody>().MovePosition(testpos);
+                tf.rotation = defaultRotation;
 
-                //debug 移動距離が足りない？MovePositionの挙動がおかしい
-                GetComponent<Rigidbody>().MovePosition(GetComponent<Rigidbody>().position + new Vector3(0.0f, objectHeight / 100, 0.0f));
-
-                //transform.localPosition = new Vector3(defaultTransform.x, y , defaultTransform.z);
-                tf.rotation = new Quaternion(0, defaultRotationY, 0, 0);
-                
                 //if (timer > stoptime)//Nomal init
-                if(counter > 200) //debug MovePosition の挙動の為長め
+                if (counter >= 100) //debug
                 {
                     state = State.Normal;
                     gameObject.layer = 0; //default
-                    tf.localPosition = defaultTransform;
+                    tf.position = defaultTransform;
                     gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                    tf.rotation = new Quaternion(0, defaultRotationY, 0, 0);
+                    //tf.rotation = new Quaternion(0, defaultRotationY, 0, 0);
+                    tf.rotation = defaultRotation;
                     gameObject.GetComponent<Rigidbody>().useGravity = true;
                     gameObject.GetComponent<Rigidbody>().isKinematic = false;
                 }
@@ -118,31 +115,16 @@ public class bou2 : MonoBehaviour
                 //gameObject.GetComponent<Renderer>().material.color = new Color(color.r, color.g, color.b , color.a - 1 / (float)eraseFrame);
                 if (timer > stoptime)
                 {
-                    state = State.Grow;
-                    gameObject.layer = LayerMask.NameToLayer("Growing");
-                    gameObject.GetComponent<Rigidbody>().useGravity = false;
-                    tf.localPosition = defaultTransform + new Vector3(0.0f, -objectHeight, 0.0f);
-                    tf.rotation = new Quaternion(0, defaultRotationY, 0, 0);
-                    TypeToggle();
-                    stoptime = 0;
-                    gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                    gameObject.GetComponent<Rigidbody>().isKinematic = true;
+                    GrowInit();
                 }
                 break;
         }
-        if(transform.position.y < -50)
+        if(tf.position.y < -50)
         {
-            state = State.Grow;
-            gameObject.layer = LayerMask.NameToLayer("Growing");
-            gameObject.GetComponent<Rigidbody>().useGravity = false;
-            tf.localPosition = defaultTransform + new Vector3(0.0f, -objectHeight - 0.03f, 0.0f);
-            tf.rotation = new Quaternion(0, defaultRotationY, 0, 0);
-            TypeToggle();
-            stoptime = 0;
-            gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            gameObject.GetComponent<Rigidbody>().isKinematic = true;
+            GrowInit();
         }
     }
+
     int TypeToggle()
     {
         if (type == Type.blue)
@@ -168,6 +150,49 @@ public class bou2 : MonoBehaviour
     public void DefaultReset()
     {
         defaultTransform = tf.position + new Vector3(0.0f,0.02f,0.0f);
+        defaultRotation = tf.rotation;
         defaultRotationY = tf.rotation.y;
+    }
+    
+    private void GrowInit()
+    {
+        state = State.Grow;
+        gameObject.layer = LayerMask.NameToLayer("Growing");
+        gameObject.GetComponent<Rigidbody>().useGravity = false;
+        tf.position = defaultTransform + new Vector3(0.0f, -objectHeight, 0.0f);
+        tf.rotation = defaultRotation;
+        TypeToggle();
+        stoptime = 0;
+        gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        gameObject.GetComponent<Rigidbody>().isKinematic = true;
+        testpos = defaultTransform + new Vector3(0.0f, -objectHeight, 0.0f);
+    }
+    public void Reset()
+    {
+
+        timer = 0;
+        type = Type.blue;
+        gameObject.GetComponent<Renderer>().material.color = Color.blue;
+        state = State.Normal;
+        gameObject.layer = 0; //default
+        tf.position = defaultTransform;
+        gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        tf.rotation = defaultRotation;
+        gameObject.GetComponent<Rigidbody>().useGravity = true;
+        gameObject.GetComponent<Rigidbody>().isKinematic = false;
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name.Contains("obj"))
+        {
+            //obj to obj hit
+        }
+        if (collision.gameObject.name.Contains("player"))
+        {
+            //obj to player
+        }
+
+
     }
 }
