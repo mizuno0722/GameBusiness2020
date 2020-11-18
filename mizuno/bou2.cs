@@ -12,6 +12,7 @@ public class bou2 : MonoBehaviour
     Vector3 defaultTransform;
     float defaultRotationY;
     Quaternion defaultRotation;
+    [SerializeField]Type defaultType = Type.blue;
     float timer;
     float stoptime;
     int counter;
@@ -47,7 +48,7 @@ public class bou2 : MonoBehaviour
         tf = GetComponent<Transform>();
         timer = 0;
         DefaultReset();
-        type = Type.blue;
+        type = defaultType;
         gameObject.GetComponent<Renderer>().material.SetFloat("_Mode", 3);
         gameObject.GetComponent<Renderer>().material.color = Color.blue;
         
@@ -171,7 +172,7 @@ public class bou2 : MonoBehaviour
     {
 
         timer = 0;
-        type = Type.blue;
+        type = defaultType;
         gameObject.GetComponent<Renderer>().material.color = Color.blue;
         state = State.Normal;
         gameObject.layer = 0; //default

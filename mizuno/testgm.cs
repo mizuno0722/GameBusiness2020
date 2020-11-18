@@ -110,6 +110,8 @@ public class Testgm : MonoBehaviour
     }
     public void Reset()
     {
+        GameObject.Find("GameClearText").GetComponent<Text>().color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
+        GameObject.Find("GameOverText").GetComponent<Text>().color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
         if (bouManager2 == null) bouManager2 = BouManager2.instance;
         bouManager2.AllReset();
         if (player2 == null) player2 = Player2.instance;
