@@ -16,7 +16,7 @@ public class ButtonManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log(AudioListener.volume);
     }
     public void OnClick()
     {
@@ -26,21 +26,24 @@ public class ButtonManager : MonoBehaviour
     {
         if (optionflg == false)
         {
-            GameObject.Find("SoundOnButton").GetComponent<Animator>().SetBool("Optionflg",true);
-            Debug.Log("オプションボタン押した");
+            GameObject.Find("SoundOnButton").GetComponent<Animator>().SetBool("optionflg",true);
+            optionflg = true;
         }
         else
         {
-            GameObject.Find("SoundOnButton").GetComponent<Animator>().SetBool("Optionflg", false);
+            GameObject.Find("SoundOnButton").GetComponent<Animator>().SetBool("optionflg", false);
             Debug.Log("オプションボタンもう一度押した");
+            optionflg = false;
         }
     }
     public void OnclickSoundOnButton()
     {
+        AudioListener.volume = 0;
         Debug.Log("サウンドオンボタン押した");
     }
     public void OnclickSoundOffButton()
     {
+        AudioListener.volume = 1;
         Debug.Log("サウンドオフボタン押した");
     }
 }
