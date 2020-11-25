@@ -50,8 +50,8 @@ public class bou2 : MonoBehaviour
         DefaultReset();
         type = defaultType;
         gameObject.GetComponent<Renderer>().material.SetFloat("_Mode", 3);
-        gameObject.GetComponent<Renderer>().material.color = Color.blue;
-        
+        SetMaterialColor();
+
         state = State.Normal;
 
         objectHeight = gameObject.GetComponent<Renderer>().bounds.size.y + 0.0f;
@@ -173,7 +173,7 @@ public class bou2 : MonoBehaviour
 
         timer = 0;
         type = defaultType;
-        gameObject.GetComponent<Renderer>().material.color = Color.blue;
+        SetMaterialColor();
         state = State.Normal;
         gameObject.layer = 0; //default
         tf.position = defaultTransform;
@@ -197,5 +197,16 @@ public class bou2 : MonoBehaviour
         }
 
 
+    }
+    void SetMaterialColor()
+    {
+        if (type == Type.blue)
+        {
+            gameObject.GetComponent<Renderer>().material.color = Color.blue;
+        }
+        if (type == Type.red)
+        {
+            gameObject.GetComponent<Renderer>().material.color = Color.red;
+        }
     }
 }
