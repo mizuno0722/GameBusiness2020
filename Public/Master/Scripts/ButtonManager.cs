@@ -4,6 +4,7 @@ public class ButtonManager : MonoBehaviour
 {
     private bool optionflg;
     public GameObject skinui;
+    Player2 player2;
     void Start()
     {
         optionflg = false;
@@ -39,10 +40,14 @@ public class ButtonManager : MonoBehaviour
 
     public void OnclickShopButton()//ショップボタン押したら
     {
+        if (player2 == null) player2 = GameObject.Find("Player").GetComponent<Player2>();
+        player2.moveflg = false;
         skinui.SetActive(true);
     }
     public void OnclickShopCancelButton()//ショップキャンセルボタン押したら
     {
+        if (player2 == null) player2 = GameObject.Find("Player").GetComponent<Player2>();
+        player2.moveflg = true;
         skinui.SetActive(false);
     }
 }

@@ -10,7 +10,12 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     Player2 player2;
     BouManager2 boumanager2;
+    public AudioClip clearsound;
+    AudioSource audiosource;
     Testgm testgm;
+    public GameObject titleui;
+    public Material material;
+
     public enum GameState
     {
         Title,
@@ -31,12 +36,17 @@ public class GameManager : MonoBehaviour
         testgm = Testgm.instance;
         state = GameState.Title;
         onetimeflg = true;//一度だけ実行させる用
+        audiosource = GetComponent<AudioSource>();
     }
 
     void Update()
     {
         switch (state)
         {
+            case GameState.Title:
+                TitleArrive();            
+                break;
+
             case GameState.Game:
                 if (oldState != state) break;
                 if (player2 == null) player2 = GameObject.Find("Player").GetComponent<Player2>();
@@ -49,12 +59,14 @@ public class GameManager : MonoBehaviour
                 if (boumanager2 == null) boumanager2 = GameObject.Find("BouManager").GetComponent<BouManager2>();
                 if (boumanager2.IsClear())
                 {
+                    audiosource.PlayOneShot(clearsound);
                     state = GameState.Gameclear;
                     GameObject.Find("GameClearText").GetComponent<Text>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
                 }
                 break;
+            
             case GameState.Gameclear:
-                
+                    
                 if (Input.GetMouseButton(0))
                 {
                     if (testgm == null) testgm = Testgm.instance;
@@ -67,35 +79,19 @@ public class GameManager : MonoBehaviour
                 {
                     if (testgm == null) testgm = Testgm.instance;
                     testgm.Reset();
-                    state = GameState.Game;
+                    state = GameState.Title;
                 }
                 break;
         }
         oldState = state;
-        /*
-        if (state == GameState.Game)
-        {
-            //GameObject.Find("TapUI").SetActive(false);
-            if (player2 == null)
-                player2 = GameObject.Find("Player").GetComponent<Player2>();
-            if (player2.IsGameOver())
-                state = GameState.Gameover;
-
-            if (boumanager2 == null)
-                boumanager2 = GameObject.Find("BouManager").GetComponent<BouManager2>();
-            if (boumanager2.IsClear())
-                state = GameState.Gameclear;
-
-            if (state == GameState.Gameclear)
-            {
-                GameObject.Find("GameClearText").GetComponent<Text>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-            }
-            if (state == GameState.Gameover)
-            {
-                GameObject.Find("GameOverText").GetComponent<Text>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-            }
-
-        }*/
+    }
+    void TitleArrive()
+    {
+        titleui.SetActive(true);
+    }
+    public void SetMaterial(GameObject player)
+    {
+        player.GetComponent<Renderer>().material = material;
     }
 }
 

@@ -5,10 +5,11 @@ using UnityEngine;
 public class Icon : MonoBehaviour {
     public GameObject player;
     public Material icon;
+    GameManager gamemanager;
 
     // Start is called before the first frame update
     void Start(){
-        
+        gamemanager = GameManager.instance;
     }
 
     // Update is called once per frame
@@ -19,7 +20,8 @@ public class Icon : MonoBehaviour {
     public void OnChick(){
         if(player == null){
             player = GameObject.Find("Player");
-            player.GetComponent<Renderer>().material = icon; 
+            player.GetComponent<Renderer>().material = icon;
+            gamemanager.material = icon;
         }
       
 

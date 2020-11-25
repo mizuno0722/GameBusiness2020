@@ -8,6 +8,8 @@ public class Tap_State : MonoBehaviour
 {
     GameObject gamemanager_object;
     GameManager gamemanager_script;
+    public GameObject titleui;
+    Player2 player2;
 
     void Start()
     {
@@ -34,7 +36,9 @@ public class Tap_State : MonoBehaviour
             {
                 case GameManager.GameState.Title://タイトル画面でタップされた処理
                     gamemanager_script.state = GameManager.GameState.Game;
-                    GameObject.Find("TitleUI").SetActive(false);
+                    if (player2 == null) player2 = GameObject.Find("Player").GetComponent<Player2>();
+                    player2.moveflg = true;
+                    titleui.SetActive(false);
                     break;
 
                 case GameManager.GameState.Gameover://ゲームオーバー時にタップされた処理

@@ -101,6 +101,7 @@ public class Testgm : MonoBehaviour
             GameObject.Find("GameOverText").GetComponent<Text>().color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
             if (gameManager == null) gameManager = GameManager.instance;
             gameManager.state = GameManager.GameState.Moving;
+            gameManager.SetMaterial(stageObject[1].transform.FindChild("Player").gameObject);
             return 0;
         }
         else
