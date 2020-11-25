@@ -102,7 +102,7 @@ public class bou2 : MonoBehaviour
             case State.FallDown:
                 if (timer > stoptime) //erase init
                 {
-                    audiosource.PlayOneShot(sound1);
+                   
                     state = State.Erase;
                     stoptime = Time.time + fallDownTime;
                 }
@@ -187,10 +187,12 @@ public class bou2 : MonoBehaviour
     {
         if (collision.gameObject.name.Contains("obj"))
         {
+            audiosource.PlayOneShot(sound1);
             //obj to obj hit
         }
         if (collision.gameObject.name.Contains("player"))
         {
+            audiosource.PlayOneShot(sound1);
             //obj to player
         }
 
