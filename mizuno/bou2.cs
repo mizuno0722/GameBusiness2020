@@ -80,7 +80,7 @@ public class bou2 : MonoBehaviour
                 {
                     state = State.Normal;
                     gameObject.layer = 0; //default
-                    tf.position = defaultTransform;
+                    tf.localPosition = defaultTransform;
                     gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
                     //tf.rotation = new Quaternion(0, defaultRotationY, 0, 0);
                     tf.rotation = defaultRotation;
@@ -120,7 +120,7 @@ public class bou2 : MonoBehaviour
                 }
                 break;
         }
-        if(tf.position.y < -50)
+        if(tf.localPosition.y < -50)
         {
             GrowInit();
         }
@@ -150,7 +150,7 @@ public class bou2 : MonoBehaviour
 
     public void DefaultReset()
     {
-        defaultTransform = tf.position + new Vector3(0.0f,0.02f,0.0f);
+        defaultTransform = tf.localPosition + new Vector3(0.0f,0.02f,0.0f);
         defaultRotation = tf.rotation;
         defaultRotationY = tf.rotation.y;
     }
@@ -160,7 +160,7 @@ public class bou2 : MonoBehaviour
         state = State.Grow;
         gameObject.layer = LayerMask.NameToLayer("Growing");
         gameObject.GetComponent<Rigidbody>().useGravity = false;
-        tf.position = defaultTransform + new Vector3(0.0f, -objectHeight, 0.0f);
+        tf.localPosition = defaultTransform + new Vector3(0.0f, -objectHeight, 0.0f);
         tf.rotation = defaultRotation;
         TypeToggle();
         stoptime = 0;
@@ -176,7 +176,7 @@ public class bou2 : MonoBehaviour
         SetMaterialColor();
         state = State.Normal;
         gameObject.layer = 0; //default
-        tf.position = defaultTransform;
+        tf.localPosition = defaultTransform;
         gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
         tf.rotation = defaultRotation;
         gameObject.GetComponent<Rigidbody>().useGravity = true;
