@@ -3,30 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraMove : MonoBehaviour{
-    
+
     private Transform myTrasnform;
     private Vector3 velocity;
-    public  float speed;
+    public float speed;
     // Start is called before the first frame update
-   
-    void Start(){
-        myTrasnform = this.transform; 
+
+    void Start()
+    {
+        myTrasnform = this.transform;
         velocity = myTrasnform.position;
     }
 
     // Update is called once per frame
-    void Update(){
+    void Update()
+    {
 
-        if (Input.GetKey(KeyCode.UpArrow)){
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
             velocity.z += speed;
         }
-        if (Input.GetKey(KeyCode.RightArrow)){
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
             velocity.x += speed;
         }
-        if (Input.GetKey(KeyCode.DownArrow)){
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
             velocity.z -= speed;
         }
-        if (Input.GetKey(KeyCode.LeftArrow)){
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
             velocity.x -= speed;
         }
 
