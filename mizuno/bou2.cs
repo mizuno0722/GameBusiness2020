@@ -9,7 +9,7 @@ public class bou2 : MonoBehaviour
     Transform tf;
     public AudioClip sound1;
     AudioSource audiosource;
-    Vector3 defaultTransform;
+    public Vector3 defaultTransform;
     float defaultRotationY;
     Quaternion defaultRotation;
     [SerializeField]Type defaultType = Type.blue;
@@ -160,13 +160,15 @@ public class bou2 : MonoBehaviour
         state = State.Grow;
         gameObject.layer = LayerMask.NameToLayer("Growing");
         gameObject.GetComponent<Rigidbody>().useGravity = false;
-        tf.localPosition = defaultTransform + new Vector3(0.0f, -objectHeight, 0.0f);
-        tf.rotation = defaultRotation;
         TypeToggle();
         stoptime = 0;
         gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
         gameObject.GetComponent<Rigidbody>().isKinematic = true;
+        tf.localPosition = defaultTransform + new Vector3(0.0f, -objectHeight, 0.0f);
+        tf.rotation = defaultRotation;
         testpos = defaultTransform + new Vector3(0.0f, -objectHeight, 0.0f);
+        var parent = transform.parent.gameObject;
+        testpos = parent.transform.TransformPoint(testpos);
     }
     public void Reset()
     {
