@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     AudioSource audiosource;
     Testgm testgm;
     public GameObject titleui;
+    [SerializeField]
     public Material material;
 
     public enum GameState

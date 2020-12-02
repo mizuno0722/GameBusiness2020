@@ -16,6 +16,7 @@ public class Testgm : MonoBehaviour
     public float moveCoefficient;
 
     BouManager2 bouManager2;
+    Camera camera;
 
     private void Awake()
     {
@@ -25,7 +26,6 @@ public class Testgm : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
         player2 = Player2.instance;
         instance = this;
         nowStageNum = 0;
@@ -35,7 +35,9 @@ public class Testgm : MonoBehaviour
         stageData = Resources.Load<StageData>("TestStageData");
         stageObject[0] = Instantiate(stageData.stage[nowStageNum]);
         bouManager2 = GameObject.Find("BouManager").GetComponent<BouManager2>();
-
+        if (gameManager == null) gameManager = GameManager.instance;
+        gameManager.SetMaterial(GameObject.Find("Player"));
+        //camera = Camera.instance;
     }
 
     // Update is called once per frame
@@ -78,6 +80,8 @@ public class Testgm : MonoBehaviour
             bouManager2.AllDefaultReset();
             player2.DefaultReset();
             gameManager.state = GameManager.GameState.Game;
+            if (camera == null) camera = Camera.instance;
+            camera.isStageMove = false;
             return; 
 
         }
@@ -102,6 +106,8 @@ public class Testgm : MonoBehaviour
             if (gameManager == null) gameManager = GameManager.instance;
             gameManager.state = GameManager.GameState.Moving;
             gameManager.SetMaterial(stageObject[1].transform.FindChild("Player").gameObject);
+            if (camera == null) camera = Camera.instance;
+            camera.isStageMove = true;
             return 0;
         }
         else
