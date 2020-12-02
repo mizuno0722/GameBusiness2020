@@ -1997,7 +1997,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1350098346
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3653,6 +3653,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 943ce92b039d25f4d9bb933e983a3c4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clearsound: {fileID: 0}
+  titleui: {fileID: 0}
+  material: {fileID: 0}
   state: 0
 --- !u!4 &2031346637
 Transform:
@@ -3680,6 +3683,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ca79074aa9fa004dbe26dd1a19c35f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  titleui: {fileID: 0}
 --- !u!114 &2031346639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3692,4 +3696,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 553d1f4c51f230d4dbcff92d89f3ff3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveCoefficient: 0

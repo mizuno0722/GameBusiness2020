@@ -30,6 +30,7 @@ public class Camera : MonoBehaviour {
         //次のステージに行くと初期位置に
         if (Input.GetKeyDown(KeyCode.N))
         {
+            player = null;
             zoominNow = false;
             cameraObj.transform.position = initialPos;
         }
