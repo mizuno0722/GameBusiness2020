@@ -68,6 +68,7 @@ public class Testgm : MonoBehaviour
         float x = stageObject[1].transform.position.x * moveCoefficient;
         if (x < 0.01)
         {
+            stageObject[1].transform.position = new Vector3(0.0f, 0.0f, 0.0f);
             isMove = false;
             Destroy(stageObject[0]);
             stageObject[0] = stageObject[1];
@@ -108,6 +109,8 @@ public class Testgm : MonoBehaviour
             gameManager.SetMaterial(stageObject[1].transform.FindChild("Player").gameObject);
             if (camera == null) camera = Camera.instance;
             camera.isStageMove = true;
+            Vector3 pos = stageObject[1].transform.FindChild("Player").transform.position - new Vector3(difference, 0.0f, 0.0f);
+            camera.ResetInitialPos(pos);
             return 0;
         }
         else

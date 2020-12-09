@@ -150,4 +150,8 @@ public class Camera : MonoBehaviour
         zoominNow = true;
         offset = new Vector3(0, 5, -3);
     }
+    public void ResetInitialPos(Vector3 _playerpos)
+    {
+        initialPos = _playerpos + initialOffset;
+    }
 }
