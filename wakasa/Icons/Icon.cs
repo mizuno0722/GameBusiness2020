@@ -18,7 +18,9 @@ public class Icon : MonoBehaviour {
     }
 
     public void OnChick(){
-        if(player == null){
+        player = null;
+
+        if (player == null){
             player = GameObject.Find("Player");
             player.GetComponent<Renderer>().material = icon;
             gamemanager.material = icon;
