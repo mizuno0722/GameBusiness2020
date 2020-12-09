@@ -39,7 +39,7 @@ public class Camera : MonoBehaviour
 
         //オブジェクトを探す
         if (player == null) player = GameObject.Find("Player");
-        if (oldisStageMove == false && isStageMove == true)
+        if (oldisStageMove == true && isStageMove == false)
         {
             isMove = true;
             destination = initialOffset;
