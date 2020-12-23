@@ -7,6 +7,7 @@ public class BouManager2 : MonoBehaviour
     bou2[] bous;
     public static BouManager2 instance;
     bool clearFlag;
+    bool isGameOver;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +19,7 @@ public class BouManager2 : MonoBehaviour
             bous[i] = instance.transform.GetChild(i).GetComponent<bou2>();
         }
         clearFlag = false;
+        isGameOver = false;
     }
 
     // Update is called once per frame
@@ -30,6 +32,10 @@ public class BouManager2 : MonoBehaviour
             {
                 count++;
             }
+            if (bous[i].GetIsGameOver())
+            {
+                isGameOver = true;
+            }
         }
         if (bous.Length * 0.9 < count)
         {
@@ -39,10 +45,16 @@ public class BouManager2 : MonoBehaviour
         {
             clearFlag = false;
         }
+
     }
     public bool IsClear()
     {
         return clearFlag;
+    }
+
+    public bool IsGameOver()
+    {
+        return isGameOver;
     }
 
     public void AllDefaultReset()
@@ -58,5 +70,7 @@ public class BouManager2 : MonoBehaviour
         {
             bous[i].Reset();
         }
+        clearFlag = false;
+        isGameOver = false;
     }
 }

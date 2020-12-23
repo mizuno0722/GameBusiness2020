@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     }
     public GameState state;
     GameState oldState;
+    bool oldMouseButton0;
     private bool onetimeflg;
 
     void Start()
@@ -51,13 +52,14 @@ public class GameManager : MonoBehaviour
             case GameState.Game:
                 if (oldState != state) break;
                 if (player2 == null) player2 = GameObject.Find("Player").GetComponent<Player2>();
-                if (player2.IsGameOver())
+                if (boumanager2 == null) boumanager2 = GameObject.Find("BouManager").GetComponent<BouManager2>();
+
+                if (player2.IsGameOver() || boumanager2.IsGameOver())
                 {
                     state = GameState.Gameover;
                     GameObject.Find("GameOverText").GetComponent<Text>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
                 }
 
-                if (boumanager2 == null) boumanager2 = GameObject.Find("BouManager").GetComponent<BouManager2>();
                 if (boumanager2.IsClear())
                 {
                     audiosource.PlayOneShot(clearsound);
@@ -68,15 +70,15 @@ public class GameManager : MonoBehaviour
             
             case GameState.Gameclear:
                     
-                if (Input.GetMouseButton(0))
+                if (Input.GetMouseButton(0) && !oldMouseButton0)
                 {
                     if (testgm == null) testgm = Testgm.instance;
                     testgm.NextStage();
                 }
+                break;
 
-                    break;
             case GameState.Gameover:
-                if (Input.GetMouseButton(0))
+                if (Input.GetMouseButton(0) && !oldMouseButton0)
                 {
                     if (testgm == null) testgm = Testgm.instance;
                     testgm.Reset();
@@ -85,6 +87,7 @@ public class GameManager : MonoBehaviour
                 break;
         }
         oldState = state;
+        oldMouseButton0 = Input.GetMouseButton(0);
     }
     void TitleArrive()
     {

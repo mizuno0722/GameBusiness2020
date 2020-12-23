@@ -2,6 +2,7 @@
 using System.Reflection;
 using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class Tap_State : MonoBehaviour
@@ -39,6 +40,7 @@ public class Tap_State : MonoBehaviour
                     if (player2 == null) player2 = GameObject.Find("Player").GetComponent<Player2>();
                     player2.moveflg = true;
                     titleui.SetActive(false);
+                    GameObject.Find("StageNumText").GetComponent<Text>().text = "";
                     break;
 
                 case GameManager.GameState.Gameover://ゲームオーバー時にタップされた処理

@@ -16,6 +16,7 @@ public class bou2 : MonoBehaviour
     float timer;
     float stoptime;
     int counter;
+    bool isGameOver = false;
     public float fallDownTime = 3.0f;   //default
     public float growingTime = 1.0f;      //default
     public float eraseTime = 1.0f;        //default
@@ -183,6 +184,7 @@ public class bou2 : MonoBehaviour
         tf.rotation = defaultRotation;
         gameObject.GetComponent<Rigidbody>().useGravity = true;
         gameObject.GetComponent<Rigidbody>().isKinematic = false;
+        isGameOver = false;
     }
 
     void OnCollisionEnter(Collision collision)
@@ -192,9 +194,13 @@ public class bou2 : MonoBehaviour
             audiosource.PlayOneShot(sound1);
             //obj to obj hit
         }
-        if (collision.gameObject.name.Contains("player"))
+        if (collision.gameObject.name.Contains("Player"))
         {
             audiosource.PlayOneShot(sound1);
+            if(type == Type.red)
+            {
+                isGameOver = true;
+            }
             //obj to player
         }
 
@@ -210,5 +216,9 @@ public class bou2 : MonoBehaviour
         {
             gameObject.GetComponent<Renderer>().material.color = Color.red;
         }
+    }
+    public bool GetIsGameOver()
+    {
+        return isGameOver;
     }
 }

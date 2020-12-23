@@ -18,6 +18,8 @@ public class Testgm : MonoBehaviour
     BouManager2 bouManager2;
     Camera camera;
 
+    Text stageNumText;
+
     private void Awake()
     {
         Application.targetFrameRate = 60; //fps
@@ -37,6 +39,10 @@ public class Testgm : MonoBehaviour
         bouManager2 = GameObject.Find("BouManager").GetComponent<BouManager2>();
         if (gameManager == null) gameManager = GameManager.instance;
         gameManager.SetMaterial(GameObject.Find("Player"));
+        stageNumText = GameObject.Find("StageNumText").GetComponent<Text>();
+        int nowStage = nowStageNum + 1;
+        stageNumText.text = "STAGE " + nowStage;
+        
         //camera = Camera.instance;
     }
 
@@ -54,7 +60,11 @@ public class Testgm : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.N))
             {
-                NextStage();
+                if (NextStage() == -1)
+                {
+                    //最終ステージクリア
+                }
+                
             }
             if (Input.GetKey(KeyCode.T))
             {
@@ -83,6 +93,7 @@ public class Testgm : MonoBehaviour
             gameManager.state = GameManager.GameState.Game;
             if (camera == null) camera = Camera.instance;
             camera.isStageMove = false;
+            stageNumText.text = "";
             return; 
 
         }
@@ -111,6 +122,8 @@ public class Testgm : MonoBehaviour
             camera.isStageMove = true;
             Vector3 pos = stageObject[1].transform.FindChild("Player").transform.position - new Vector3(difference, 0.0f, 0.0f);
             camera.ResetInitialPos(pos);
+            int nowStage = nowStageNum + 1;
+            stageNumText.text = "STAGE " + nowStage;
             return 0;
         }
         else
@@ -126,5 +139,10 @@ public class Testgm : MonoBehaviour
         bouManager2.AllReset();
         if (player2 == null) player2 = Player2.instance;
         player2.Reset();
+    }
+
+    public int GetStageNum()
+    {
+        return nowStageNum;
     }
 }
