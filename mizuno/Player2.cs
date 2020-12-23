@@ -8,8 +8,7 @@ public class Player2 : MonoBehaviour
     public static Player2 instance;
     float speed = 4;
     float maxSpeed = 20;
-    public bool moveflg; 
-
+    public bool moveflg;
     Vector3 defaultTransform;
 
     Rigidbody rb;
@@ -78,10 +77,6 @@ public class Player2 : MonoBehaviour
                 gameOverFlag = true;
             }
             //debug reset
-            if (Input.GetKey(KeyCode.R))
-            {
-                Reset();
-            }
 
             var translation = this.rb.velocity * Time.deltaTime; // 位置の変化量
             var distance = translation.magnitude; // 移動した距離
