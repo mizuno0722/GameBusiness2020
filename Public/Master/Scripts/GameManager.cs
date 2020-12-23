@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using UnityEditorInternal;
+//using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
         operationflg = false;//
         //gameoverui.SetActive(false);
         audiosource = GetComponent<AudioSource>();
+        Screen.SetResolution(1080, 1920, Screen.fullScreen);
     }
 
     void Update()
