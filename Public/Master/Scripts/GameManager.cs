@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     AudioSource audiosource;
     Testgm testgm;
     public GameObject titleui;
+    public GameObject buttonui;
+    public GameObject gameoverui;
     [SerializeField]
     public Material material;
 
@@ -28,6 +30,7 @@ public class GameManager : MonoBehaviour
     public GameState state;
     GameState oldState;
     private bool onetimeflg;
+    private bool operationflg;
 
     void Start()
     {
@@ -37,6 +40,8 @@ public class GameManager : MonoBehaviour
         testgm = Testgm.instance;
         state = GameState.Title;
         onetimeflg = true;//一度だけ実行させる用
+        operationflg = false;//
+        //gameoverui.SetActive(false);
         audiosource = GetComponent<AudioSource>();
     }
 
@@ -45,10 +50,13 @@ public class GameManager : MonoBehaviour
         switch (state)
         {
             case GameState.Title:
-                TitleArrive();            
+                TitleArrive();
+                Time.timeScale = 1;
                 break;
 
             case GameState.Game:
+                operationflg = false;
+                Time.timeScale = 1;
                 if (oldState != state) break;
                 if (player2 == null) player2 = GameObject.Find("Player").GetComponent<Player2>();
                 if (player2.IsGameOver())
@@ -67,20 +75,27 @@ public class GameManager : MonoBehaviour
                 break;
             
             case GameState.Gameclear:
-                    
-                if (Input.GetMouseButton(0))
+                Invoke("InvokeOperation", 1.5f);
+                Time.timeScale = 1;   
+                if (Input.GetMouseButton(0)&&operationflg == true)
                 {
                     if (testgm == null) testgm = Testgm.instance;
                     testgm.NextStage();
+                    operationflg = false;
                 }
 
                     break;
             case GameState.Gameover:
-                if (Input.GetMouseButton(0))
+                buttonui.SetActive(false);
+                Invoke("InvokeOperation",0.25f);               
+                Time.timeScale = 0.1f;
+                //gameoverui.SetActive(true);
+                if (Input.GetMouseButton(0)&&operationflg == true)
                 {
                     if (testgm == null) testgm = Testgm.instance;
                     testgm.Reset();
                     state = GameState.Title;
+                    operationflg = false;
                 }
                 break;
         }
@@ -89,10 +104,16 @@ public class GameManager : MonoBehaviour
     void TitleArrive()
     {
         titleui.SetActive(true);
+        buttonui.SetActive(true);
+        operationflg = false;
     }
     public void SetMaterial(GameObject player)
     {
         player.GetComponent<Renderer>().material = material;
+    }
+    void InvokeOperation()
+    {
+        operationflg = true;
     }
 }
 

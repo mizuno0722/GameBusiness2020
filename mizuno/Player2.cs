@@ -38,6 +38,10 @@ public class Player2 : MonoBehaviour
 
         if (moveflg == true)
         {
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return;
+            }
             if (Input.GetMouseButton(0))
             {
                 if (mousef == 0)
