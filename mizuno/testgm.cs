@@ -66,7 +66,7 @@ public class Testgm : MonoBehaviour
                 }
                 
             }
-            if (Input.GetKey(KeyCode.T))
+            if (Input.GetKey(KeyCode.R))
             {
                 Reset();
             }

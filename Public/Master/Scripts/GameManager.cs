@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public GameObject gameoverui;
     [SerializeField]
     public Material material;
+    public GameObject kamifubuki;
 
     public enum GameState
     {
@@ -52,12 +53,14 @@ public class GameManager : MonoBehaviour
         switch (state)
         {
             case GameState.Title:
+                kamifubuki.SetActive(false);
                 TitleArrive();
                 Time.timeScale = 1;
                 break;
 
             case GameState.Game:
                 operationflg = false;
+                buttonui.SetActive(true);
                 Time.timeScale = 1;
                 if (oldState != state) break;
                 if (player2 == null) player2 = GameObject.Find("Player").GetComponent<Player2>();
@@ -73,19 +76,19 @@ public class GameManager : MonoBehaviour
                 {
                     audiosource.PlayOneShot(clearsound);
                     state = GameState.Gameclear;
+                    kamifubuki.SetActive(true);
                     GameObject.Find("GameClearText").GetComponent<Text>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
                 }
                 break;
             
             case GameState.Gameclear:
-
                 Invoke("InvokeOperation", 1.5f);
                 Time.timeScale = 1;   
                 if (Input.GetMouseButton(0)&&operationflg == true)
-
                 {
                     if (testgm == null) testgm = Testgm.instance;
                     testgm.NextStage();
+                    kamifubuki.SetActive(false);
                     operationflg = false;
                 }
                 break;

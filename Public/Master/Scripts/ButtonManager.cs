@@ -5,6 +5,7 @@ public class ButtonManager : MonoBehaviour
     private bool optionflg;
     public GameObject skinui;
     Player2 player2;
+    Testgm testgm;
     void Start()
     {
         optionflg = false;
@@ -54,8 +55,8 @@ public class ButtonManager : MonoBehaviour
     }
     public void OnclickResetButton()//
     {
-        if (player2 == null) player2 = GameObject.Find("Player").GetComponent<Player2>();
-        player2.Reset();
+        if (testgm == null) testgm = GameObject.Find("GameManager").GetComponent<Testgm>();
+        testgm.Reset();
 
     }
 }
