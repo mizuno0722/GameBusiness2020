@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound1: {fileID: 8300000, guid: eb056bfae4dfdd24f9d36853d76b4a7b, type: 3}
+  defaultTransform: {x: 0, y: 0, z: 0}
   defaultType: 0
   fallDownTime: 1
   growingTime: 1
@@ -141,7 +142,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: eb056bfae4dfdd24f9d36853d76b4a7b, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
