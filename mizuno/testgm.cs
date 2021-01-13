@@ -86,6 +86,7 @@ public class Testgm : MonoBehaviour
             nowStageNum++;
             bouManager2 = stageObject[0].transform.Find("BouManager").GetComponent<BouManager2>();
             player2 = stageObject[0].transform.Find("Player").GetComponent<Player2>();
+            player2.SetMoveflag(true);
 
             //bouManager2 = GameObject.Find("BouManager").GetComponent<BouManager2>();
             bouManager2.AllDefaultReset();
@@ -121,6 +122,7 @@ public class Testgm : MonoBehaviour
             if (camera == null) camera = Camera.instance;
             camera.isStageMove = true;
             Vector3 pos = stageObject[1].transform.FindChild("Player").transform.position - new Vector3(difference, 0.0f, 0.0f);
+            stageObject[1].transform.FindChild("Player").GetComponent<Player2>().SetMoveflag(false);
             camera.ResetInitialPos(pos);
             int nowStage = nowStageNum + 1;
             stageNumText.text = "STAGE " + nowStage;
@@ -133,6 +135,7 @@ public class Testgm : MonoBehaviour
     }
     public void Reset()
     {
+        if (isMove) return;
         GameObject.Find("GameClearText").GetComponent<Text>().color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
         GameObject.Find("GameOverText").GetComponent<Text>().color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
         if (bouManager2 == null) bouManager2 = BouManager2.instance;

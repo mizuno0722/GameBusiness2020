@@ -23,7 +23,7 @@ public class Player2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        moveflg = true;
+        moveflg = false;
         instance = this;
         rb = GetComponent<Rigidbody>();
         gameOverFlag = false;
@@ -117,5 +117,8 @@ public class Player2 : MonoBehaviour
         this.transform.rotation = new Quaternion(0.0f, 0.0f, 0.0f, 0.0f);
         rb.velocity = Vector3.zero;
     }
-
+    public void  SetMoveflag(bool _flag)
+    {
+        moveflg = _flag;
+    }
 }

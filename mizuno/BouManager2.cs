@@ -8,6 +8,8 @@ public class BouManager2 : MonoBehaviour
     public static BouManager2 instance;
     bool clearFlag;
     bool isGameOver;
+    GaugeManager gaugeManager;
+    int oldCount;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +20,8 @@ public class BouManager2 : MonoBehaviour
         {
             bous[i] = instance.transform.GetChild(i).GetComponent<bou2>();
         }
+        gaugeManager = GameObject.Find("Gauge").GetComponent<GaugeManager>();
+        gaugeManager.InitFillAmount();
         clearFlag = false;
         isGameOver = false;
     }
@@ -37,6 +41,14 @@ public class BouManager2 : MonoBehaviour
                 isGameOver = true;
             }
         }
+        if(oldCount != count)
+        {
+
+            float from = gaugeManager.GetFillAmount();
+            float to = (float)count / bous.Length;
+            StartCoroutine(gaugeManager.RedGaugeReduction(to, from, 0.5f));
+            Debug.Log("from:" + from + "  to:" + to);
+        }
         if (bous.Length * 0.9 < count)
         {
             //クリア
@@ -45,7 +57,7 @@ public class BouManager2 : MonoBehaviour
         {
             clearFlag = false;
         }
-
+        oldCount = count;
     }
     public bool IsClear()
     {
