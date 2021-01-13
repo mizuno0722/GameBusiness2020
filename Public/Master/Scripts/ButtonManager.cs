@@ -6,6 +6,7 @@ public class ButtonManager : MonoBehaviour
     public GameObject skinui;
     Player2 player2;
     Testgm testgm;
+    Camera camera;
     void Start()
     {
         optionflg = false;
@@ -57,6 +58,12 @@ public class ButtonManager : MonoBehaviour
     {
         if (testgm == null) testgm = GameObject.Find("GameManager").GetComponent<Testgm>();
         testgm.Reset();
+
+    }
+    public void OnclickCameraButton()//
+    {
+        if (camera == null) camera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        camera.ZoomToggle();
 
     }
 }

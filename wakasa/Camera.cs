@@ -127,7 +127,7 @@ public class Camera : MonoBehaviour
     }
 
 
-    private void ZoomToggle()
+    public void ZoomToggle()
     {
         isMove = true;
 
