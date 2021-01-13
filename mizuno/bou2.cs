@@ -192,6 +192,7 @@ public class bou2 : MonoBehaviour
         if (collision.gameObject.name.Contains("obj"))
         {
             audiosource.PlayOneShot(sound1);
+            Handheld.Vibrate();
             //obj to obj hit
         }
         if (collision.gameObject.name.Contains("Player"))
@@ -200,6 +201,7 @@ public class bou2 : MonoBehaviour
             if(type == Type.red)
             {
                 isGameOver = true;
+                Handheld.Vibrate();
             }
             //obj to player
         }
