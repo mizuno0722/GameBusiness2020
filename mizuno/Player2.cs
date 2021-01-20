@@ -7,7 +7,7 @@ public class Player2 : MonoBehaviour
 {
     public static Player2 instance;
     float speed = 4;
-    float maxSpeed = 20;
+    float maxSpeed = 10;
     public bool moveflg;
     Vector3 defaultTransform;
 
