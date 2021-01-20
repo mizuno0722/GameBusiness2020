@@ -19,6 +19,7 @@ public class Testgm : MonoBehaviour
     Camera camera;
 
     Text stageNumText;
+    bool firstTime = true;
 
     private void Awake()
     {
@@ -37,6 +38,7 @@ public class Testgm : MonoBehaviour
         stageData = Resources.Load<StageData>("TestStageData");
         stageObject[0] = Instantiate(stageData.stage[nowStageNum]);
         bouManager2 = GameObject.Find("BouManager").GetComponent<BouManager2>();
+        
         if (gameManager == null) gameManager = GameManager.instance;
         gameManager.SetMaterial(GameObject.Find("Player"));
         stageNumText = GameObject.Find("StageNumText").GetComponent<Text>();
@@ -49,6 +51,12 @@ public class Testgm : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (firstTime)
+        {
+            if(bouManager2 == null) bouManager2 = GameObject.Find("BouManager").GetComponent<BouManager2>();
+            bouManager2.AllWait();
+            firstTime = false;
+        }
         if (isMove)
         {
             Moving();

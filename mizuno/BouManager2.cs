@@ -85,4 +85,18 @@ public class BouManager2 : MonoBehaviour
         clearFlag = false;
         isGameOver = false;
     }
+    public void AllWait()
+    {
+        for (int i = 0; i < bous.Length; i++)
+        {
+            bous[i].WaitStart();
+        }
+    }
+    public void AllGrow()
+    {
+        for (int i = 0; i < bous.Length; i++)
+        {
+            bous[i].GrowStartFromHide();
+        }
+    }
 }

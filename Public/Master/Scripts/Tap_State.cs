@@ -11,6 +11,7 @@ public class Tap_State : MonoBehaviour
     GameManager gamemanager_script;
     public GameObject titleui;
     Player2 player2;
+    BouManager2 bouManager2;
 
     void Start()
     {
@@ -41,6 +42,8 @@ public class Tap_State : MonoBehaviour
                     player2.moveflg = true;
                     titleui.SetActive(false);
                     GameObject.Find("StageNumText").GetComponent<Text>().text = "";
+                    if (bouManager2 == null) bouManager2 = GameObject.Find("BouManager").GetComponent<BouManager2>();
+                    bouManager2.AllGrow();
                     break;
 
                 case GameManager.GameState.Gameover://ゲームオーバー時にタップされた処理
