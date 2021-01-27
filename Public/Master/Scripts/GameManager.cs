@@ -4,6 +4,7 @@ using System.IO;
 //using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -87,7 +88,11 @@ public class GameManager : MonoBehaviour
                 if (Input.GetMouseButton(0)&&operationflg == true)
                 {
                     if (testgm == null) testgm = Testgm.instance;
-                    testgm.NextStage();
+                    if(testgm.NextStage() == -1)
+                    {
+                        SceneManager.LoadScene("Endroll");//最終ステージクリア
+                    }
+                    
                     kamifubuki.SetActive(false);
                     operationflg = false;
                 }

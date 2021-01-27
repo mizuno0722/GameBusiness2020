@@ -282,7 +282,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Thank You  For Playing\n\u30D7\u30EC\u30A4\u3057\u3066\u304F\u308C\u3066\u3042\u308A\u304C\u3068\u3046\uFF01\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n-Program-\nMizuno\nWakasa\nMiyazaki\n\n\n-Sound-\nWakasa\n\n\n-Effect-\nWakasa\n\n\n-UI-\nMiyazaki\n\n\n-LevelDesign-\nMiyazaki\nWakasa\nMizuno\n\n\nSpecialThanks\n\n"
+  m_Text: "Thank You  For Playing\n\u30D7\u30EC\u30A4\u3057\u3066\u304F\u308C\u3066\u3042\u308A\u304C\u3068\u3046\uFF01\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n-Program-\nMizuno\nWakasa\nMiyazaki\n\n\n-Sound-\nWakasa\n\n\n-Effect-\nWakasa\n\n\n-UI-\nMiyazaki\n\n\n-LevelDesign-\nMiyazaki\nWakasa\nMizuno\n\n\n-SpecialThanks-\nJuno\n"
 --- !u!222 &277123963
 CanvasRenderer:
   m_ObjectHideFlags: 0

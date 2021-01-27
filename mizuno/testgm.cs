@@ -70,7 +70,7 @@ public class Testgm : MonoBehaviour
             {
                 if (NextStage() == -1)
                 {
-                    //最終ステージクリア
+                    
                 }
                 
             }
