@@ -20,7 +20,6 @@ public class bou2 : MonoBehaviour
     public float fallDownTime = 3.0f;   //default
     public float growingTime = 1.0f;      //default 未
     public float eraseTime = 1.0f;        //default
-
     float objectHeight;
 
     Vector3 testpos;
