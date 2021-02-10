@@ -64,7 +64,7 @@ public class Testgm : MonoBehaviour
 
 
         //debug
-        if(!isMove)
+        /*if(!isMove)
         {
             if (Input.GetKey(KeyCode.N))
             {
@@ -78,7 +78,7 @@ public class Testgm : MonoBehaviour
             {
                 Reset();
             }
-        }
+        }*/
     }
 
     void Moving()

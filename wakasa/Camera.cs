@@ -33,7 +33,7 @@ public class Camera : MonoBehaviour
     void Update()
     {
         //追跡するターゲットの変更
-        if (Input.GetKeyDown(KeyCode.Space)) tartgetChange = !tartgetChange;
+       // if (Input.GetKeyDown(KeyCode.Space)) tartgetChange = !tartgetChange;
 
 
 
@@ -78,13 +78,13 @@ public class Camera : MonoBehaviour
         }
         if (!isStageMove)
         {
-            if (Input.GetKeyDown(KeyCode.C))
+         /*   if (Input.GetKeyDown(KeyCode.C))
             {
                 /*if (!zoominNow) Zoomin();
-                else Reset();*/
+                else Reset();
                 ZoomToggle();
             }
-           
+           */
 
 
            

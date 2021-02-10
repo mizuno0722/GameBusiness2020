@@ -46,7 +46,11 @@ public class GameManager : MonoBehaviour
         operationflg = false;//
         //gameoverui.SetActive(false);
         audiosource = GetComponent<AudioSource>();
-        Screen.SetResolution(1080, 1920, Screen.fullScreen);
+//#if WINDOWS_UWP
+        Screen.SetResolution(576, 1024, false);
+//#else
+  //      Screen.SetResolution(1080, 1920, Screen.fullScreen);
+//#endif
     }
 
     void Update()

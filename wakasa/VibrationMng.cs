@@ -26,7 +26,7 @@ public static class VibrationMng
 #endif
         if (milliseconds >= 1000)
         {
-            Handheld.Vibrate();
+            //Handheld.Vibrate();
         }
     }
 }
