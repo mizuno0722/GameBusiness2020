@@ -3,7 +3,10 @@ guid: 943ce92b039d25f4d9bb933e983a3c4f
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - clearsound: {instanceID: 0}
+  - titleui: {instanceID: 0}
+  - material: {fileID: 2100000, guid: 96439aafa89095446b2badaff1fa0209, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
